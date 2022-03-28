@@ -1,0 +1,106 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="http://47.103.201.103/things/bootstrap.min.css">
+	<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+	<link rel="stylesheet" href="http://47.103.201.103/things/bootstrap-theme.min.css">
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="http://47.103.201.103/things/bootstrap.min.js"></script>
+	
+</head>
+<body style="background: url('https://i.loli.net/2020/04/22/iLa1TMjSsCh9H7R.png')">
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+				<div class="navbar-header">
+					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="/">JSumm</a>
+				</div>
+				
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li class="active">
+							 <a href="/">提取</a>
+						</li>
+						<li>
+							 <a href="/docs">查看</a>
+						</li>
+					</ul>
+					<form class="navbar-form navbar-left" role="search">
+                        {% csrf_token %}
+						<div class="form-group">
+							<input type="text" class="form-control" id="iptKensaku" name="keywd" />
+						</div> <button type="submit" class="btn btn-default" id="btnKensaku" formmethod="post" formaction="/search/">搜索</button>
+					</form>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							 <a href="/mine">我的&nbsp;&nbsp;&nbsp;&nbsp;</a>
+						</li>
+					</ul>
+				</div>
+				
+			</nav>
+		</div>
+	</div>
+
+    <div class="row clearfix" style="margin-top:100px;">
+        <div class="col-md-3 column">
+            <form role="form" id="frmExt" name="ext">
+                {% csrf_token %}
+                <div class="btn-group">
+                    <button class="btn btn-default" id="btnChushutsu" type="submit" formmethod="post">&nbsp;&nbsp;提取&nbsp;&nbsp;</button> <button class="btn btn-default" id="btnKuria" type="reset">&nbsp;&nbsp;清空&nbsp;&nbsp;</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 column">
+            <h2 class="text-center">
+                裁判文书摘要提取
+            </h2>
+        </div>
+        <div class="col-md-1 column" style="display: inline-flex;">
+        </div>
+        <div class="col-md-1 column" style="display: inline-flex;">
+            <h5 style="font-size:14px;font-weight:bold;line-height:1.42857143;text-align:center;white-space:nowrap;vertical-align:middle" >摘要行数</h5>
+        </div>
+        <div class="col-md-1 column" style="display: inline-flex;">
+            <input class="form-control" id="numYoyakuLines" name="yoyaku_lines" form="frmExt" maxlength="2" type="number" min="1" max="50" step="1" size="2" value="5" required style="display: inline-flex; width: 100%;">
+        </div>
+    </div>
+    <div class="row clearfix" style="margin-bottom: 20px">
+        <div class="col-md-6 column">
+            <h3 class="text-center">
+                原文
+            </h3>
+            <textarea class="form-control" id="txtGenbun" name="genbun" form="frmExt" required rows="30" placeholder="在此输入文书" style="background-color: rgba(255,255,255,0.7)">{% if is_response %}{{ response_genbun }}{% endif %}</textarea>
+        </div>
+        <div class="col-md-6 column">
+            <h3 class="text-center">
+                摘要
+            </h3>
+            <textarea class="form-control" id="txtYoyaku" rows="30" placeholder="点击“提取”按钮……" style="background-color: rgba(255,255,255,0.7)">{% if is_response %}{{ response_yoyaku }}{% endif %}</textarea>
+        </div>
+    </div>
+
+    <div class="row clearfix" style="margin-top: 40px">
+        <div class="col-md-12 column">
+            <form role="form" id="frmUpl" name="upl" onsubmit="document.getElementById('txtGenbunUpload').value = document.getElementById('txtGenbun').value;" class="form-horizontal">
+                {% csrf_token %}
+                <div class="col-sm-12" style="display: inline-flex;text-align: center">
+                    <textarea hidden id="txtGenbunUpload" name="genbun_u"></textarea>
+                    <label for="inputBunshoTitle" class="col-sm-2 control-label" style="margin-right: 40px">标题</label>
+                    <input type="text" class="form-control" id="iptBunshoTitle" name="title_u" placeholder="在此输入标题" style="width: 50%" />
+                    <label style="margin-left: 40px"><input type="checkbox" id="chkKokai" name="kokai_u" checked="checked" value="y" style="background-color: rgba(255,255,255,0.7)" /> 公开</label>
+                    <button type="submit" class="btn btn-default btn-success" id="btnAppurodo" formmethod="post" formaction="/upload/" style="margin-left: 80px">上传</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+		<div class="col-md-12 column">
+		</div>
+	</div>
+</div>
+</body>
+</html>

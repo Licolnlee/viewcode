@@ -1,0 +1,87 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="http://47.103.201.103/things/bootstrap.min.css">
+	<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+	<link rel="stylesheet" href="http://47.103.201.103/things/bootstrap-theme.min.css">
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="http://47.103.201.103/things/bootstrap.min.js"></script>
+
+</head>
+<body style="background: url('https://i.loli.net/2020/04/23/9PnJpsRbGvlTaXy.png')">
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+				<div class="navbar-header">
+					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="/">JSumm</a>
+				</div>
+				
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li>
+							 <a href="/">提取</a>
+						</li>
+						<li>
+							 <a href="/docs">查看</a>
+						</li>
+					</ul>
+					<form class="navbar-form navbar-left" role="search">
+                        {% csrf_token %}
+						<div class="form-group">
+							<input type="text" class="form-control" id="iptKensaku" name="keywd" />
+						</div> <button type="submit" class="btn btn-default" id="btnKensaku" formmethod="post" formaction="/search/">搜索</button>
+					</form>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="active">
+							 <a href="/mine">我的&nbsp;&nbsp;&nbsp;&nbsp;</a>
+						</li>
+					</ul>
+				</div>
+				
+			</nav>
+		</div>
+	</div>
+    <div class="row clearfix" style="margin-top:100px;">
+		<div class="col-md-2 column">
+			<ul class="nav nav-stacked nav-pills">
+				<li>
+					 <a href="/mine/info">我的信息</a>
+				</li>
+				<li>
+					 <a href="/mine/uploaded">我的上传</a>
+				</li>
+                <li>
+					 <a href="/mine/favourite">我的收藏</a>
+				</li>
+                <li>
+					 <a href="/upload" style="color: darkgreen;width: 36%;font-weight: bold;margin-top: 50px;background-color: lightgray">上传</a>
+				</li>
+                <li>
+					 <a href="/quit" style="color: crimson;width: 36%;font-weight: bold">退出</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-md-10 column">
+            <form class="form-horizontal" role="form">
+                {% csrf_token %}
+                <div class="col-sm-12" style="display: inline-flex;text-align: center">
+                    <label for="inputBunshoTitle" class="col-sm-2 control-label" style="margin-right: 40px">标题</label>
+                    <input type="text" class="form-control" id="iptBunshoTitle" name="title_u" placeholder="在此输入标题" style="width: 50%" />
+                    <label style="margin-left: 40px"><input type="checkbox" id="chkKokai" name="kokai_u" checked="checked" value="y" style="background-color: rgba(255,255,255,0.7)" /> 公开</label>
+                    <button type="submit" class="btn btn-default btn-success" id="btnAppurodo" formmethod="post" style="margin-left: 80px">上传</button>
+                </div>
+                <div class="col-md-12 column" style="margin-top: 40px">
+                    <textarea class="form-control" id="txtGenbun" name="genbun_u" rows="35" placeholder="在此输入文书" style="background-color: rgba(255,255,255,0.7)"></textarea>
+                </div>
+			</form>
+		</div>
+	</div>
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+		</div>
+	</div>
+</div>
+</body>
+</html>
